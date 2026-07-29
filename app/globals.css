@@ -601,22 +601,12 @@ button {
   overflow: clip;
 }
 
+/* Badge hero home. Tampilannya satu aturan dengan badge hero /inspirasi &
+   /blog — lihat .inspiration-hero-badge. Di sini tinggal animasi mount-nya:
+   reveal blur saat load (lihat @keyframes reveal-up), bukan ScrollReveal,
+   karena hero selalu di atas fold. */
 .hero-card {
-  display: flex;
-  flex-direction: row;
-  padding: 6px var(--pd-8);
-  gap: var(--gap-8);
-  color: #00419c;
-  background: var(--neutral-white);
-  box-shadow: var(--shadow-card);
-  border-radius: 4px 8px 4px 8px;
-  /* Reveal blur saat load — mount animation (lihat @keyframes reveal-up),
-     bukan ScrollReveal, karena hero selalu di atas fold. */
   animation: reveal-up 0.6s ease-out both;
-}
-
-.hero-card :is(img, svg) {
-  width: 22px;
 }
 
 .hero-title {
@@ -1508,7 +1498,8 @@ button {
   text-align: center;
 }
 
-/* Badge hero halaman (dipakai /inspirasi & /blog) */
+/* Badge hero halaman (dipakai home, /inspirasi & /blog) */
+.hero-card,
 .inspiration-hero-badge,
 .blog-hero-badge {
   display: inline-flex;
@@ -1524,6 +1515,7 @@ button {
   box-shadow: var(--shadow-card);
 }
 
+.hero-card :is(img, svg),
 .inspiration-hero-badge :is(img, svg),
 .blog-hero-badge :is(img, svg) {
   width: 16px;
@@ -3613,10 +3605,13 @@ ol.blog-post-list li::marker {
     font-size: 30px;
   }
 
+  /* Tinggi wajib eksplisit: svg ArrowUpRight kotak dan mengisi 100% kotaknya,
+     jadi height:auto membuat panahnya ikut selebar kotak (justru lebih besar
+     daripada 65.7px di desktop). */
   .solving-row .solving-icon,
   .solving-cta-row .solving-icon {
-    width: 140px;
-    height: auto;
+    width: 120px;
+    height: 52px;
   }
 
   .footer-left {
@@ -3682,6 +3677,12 @@ ol.blog-post-list li::marker {
   .solving-row-desc {
     flex: 1 1 100%;
     padding: var(--pd-8) var(--pd-16);
+  }
+
+  /* Hero /inspirasi: beri napas di bawah subtitle, karena .inspiration-gallery
+     menariknya naik lewat margin-top negatif */
+  .inspiration-hero-section {
+    padding-bottom: var(--pd-32);
   }
 
   /* Inspiration: 3 → 2 columns */
@@ -3924,10 +3925,6 @@ ol.blog-post-list li::marker {
 
   .navbar-menu {
     padding: var(--pd-8);
-  }
-
-  .hero-card p {
-    font-size: 13px;
   }
 
   .hero-title {
