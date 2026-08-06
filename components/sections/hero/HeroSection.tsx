@@ -22,7 +22,7 @@ export default function HeroSection() {
           kepuasan pelanggan adalah segalanya.
         </p>
       </div>
-      <a href={WA_LINK_DEFAULT} className="hero-button">
+      <a href="/form" className="hero-button">
         <span>Mulai Bikin Web</span>
       </a>
     </section>

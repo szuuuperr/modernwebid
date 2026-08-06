@@ -25,6 +25,7 @@ const REVEAL_SELECTOR = [
   ".blog-grid-header", ".blog-pagination", ".blog-comment",
   // .blog-card TIDAK di sini: kartu grid mount/unmount saat pindah halaman
   // pagination, jadi kelola reveal-nya sendiri lewat useInView (lihat BlogCard).
+  ".form-container",
 ].join(",");
 
 export default function ScrollReveal() {
