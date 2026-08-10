@@ -1,14 +1,6 @@
-import { Suspense } from "react";
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
-import FabButton from "@/components/layout/FabButton";
-import Footer from "@/components/layout/Footer";
-import Navbar from "@/components/layout/Navbar";
-import ScrollProgress from "@/components/layout/ScrollProgress";
-import LenisProvider from "@/components/providers/LenisProvider";
-import MicroInteractions from "@/components/providers/MicroInteractions";
-import ScrollReveal from "@/components/providers/ScrollReveal";
 import { SITE_URL } from "@/lib/site";
 
 const poppins = Poppins({
@@ -44,6 +36,10 @@ export const metadata: Metadata = {
   },
 };
 
+// Root layout minimal: font, metadata, grid-bg, dan body. Seluruh chrome
+// (Navbar/Footer/FAB/providers) ada di route group app/(site)/layout.tsx
+// supaya halaman di luar group (mis. /q/[code] QR redirect) bisa tampil
+// polos tanpa navbar.
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -53,21 +49,7 @@ export default function RootLayout({
     <html lang="id" className={`${poppins.variable} antialiased`}>
       <body>
         <div className="grid-bg"></div>
-        <div className="page-wrapper">
-          <div className="app-container">
-            <FabButton />
-            <Navbar />
-            {children}
-            <Footer />
-          </div>
-        </div>
-        <ScrollProgress />
-        <LenisProvider />
-        <MicroInteractions />
-        {/* Suspense wajib: ScrollReveal memakai useSearchParams */}
-        <Suspense fallback={null}>
-          <ScrollReveal />
-        </Suspense>
+        {children}
       </body>
     </html>
   );

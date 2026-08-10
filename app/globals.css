@@ -85,6 +85,11 @@
   --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.1);
   --shadow-card-hover: 0 14px 32px rgba(0, 0, 0, 0.14);
   --shadow-button: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+  --stage-w-base: min(100vw, 480px);
+  --stage-h-base: 100dvh;
+  --stage-w: var(--stage-w-base);
+  --stage-h: var(--stage-h-base);
 }
 
 /* ===== Reset & Base ===== */
@@ -4528,8 +4533,232 @@ ol.blog-post-list li::marker {
   }
 }
 
+/* ===== QR Redirect Page (/q/[code]) =====
+   Halaman pintu menuju link bisnis, dibuka dari scan QR di ponsel. Layout
+   link-in-bio polos tanpa navbar/footer: avatar bulat + nama bisnis, tombol
+   Google Review (border gradient pelangi) lalu WhatsApp/Instagram/Website,
+   kredit ModernWeb di bawah. Mobile-first. */
+
+.qr-page {
+  position: relative;
+  width: var(--stage-w);
+  height: var(--stage-h);
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--neutral-white);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--pd-64) var(--pd-32);
+}
+
+@media (min-width: 768px) {
+  .qr-page {
+    align-self: center;
+    border-radius: 22px;
+    box-shadow:
+      0 30px 70px rgba(50, 35, 25, 0.3),
+      0 2px 6px rgba(50, 35, 25, 0.18);
+  }
+}
+
+.qr-avatar {
+  width: 112px;
+  height: 112px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  margin-bottom: 24px;
+}
+
+.qr-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.qr-avatar-placeholder {
+  width: 100%;
+  height: 100%;
+  background: #1e2433;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qr-avatar-placeholder-img {
+  width: 36px;
+  height: auto;
+}
+
+.qr-title {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--neutral-black);
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.qr-description {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--neutral-gray);
+  text-align: center;
+  max-width: 260px;
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.qr-links {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.qr-google-btn {
+  display: block;
+  border-radius: 4px 16px 4px 16px;
+  padding: 5px;
+  background: linear-gradient(
+    135deg,
+    #f97316,
+    #ef4444,
+    #8b5cf6,
+    #3b82f6,
+    #22c55e,
+    #eab308
+  );
+  box-shadow: var(--shadow-card);
+  transition: box-shadow 0.25s ease;
+}
+
+.qr-google-btn-inner {
+  background: var(--neutral-white);
+  border-radius: 6px 12px 6px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 12px 24px;
+}
+
+.qr-google-btn:hover {
+  box-shadow: var(--shadow-card-hover);
+}
+
+.qr-google-icon {
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+}
+
+.qr-google-copy {
+  text-align: left;
+}
+
+.qr-google-text {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.25;
+  color: var(--neutral-700);
+}
+
+.qr-google-text-strong {
+  font-weight: 600;
+  color: var(--neutral-black);
+}
+
+.qr-stars {
+  display: flex;
+  gap: 2px;
+  margin-top: 4px;
+}
+
+.qr-star {
+  width: 16px;
+  height: 16px;
+  color: #facc15;
+}
+
+.qr-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 18px 24px;
+  background: var(--neutral-white);
+  border-radius: 4px 14px 4px 14px;
+  box-shadow: var(--shadow-card);
+  border: 1px solid #f3f4f6;
+  transition: box-shadow 0.25s ease;
+}
+
+.qr-link:hover {
+  box-shadow: var(--shadow-card-hover);
+}
+
+.qr-link > .qr-link-icon {
+  position: absolute;
+  left: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.qr-link-icon {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+.qr-link-icon-sm {
+  width: 28px;
+  height: 28px;
+}
+
+.qr-link-label {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--neutral-700);
+}
+
+.qr-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 64px;
+}
+
+.qr-footer-brand {
+  width: 96px;
+  height: auto;
+}
+
+.qr-footer-brand img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.qr-footer-text {
+  font-size: 10px;
+  font-weight: 400;
+  color: var(--neutral-gray);
+}
+
 /* Accessibility: show everything instantly, no motion */
 @media (prefers-reduced-motion: reduce) {
+  .qr-link {
+    transition: none;
+    box-shadow: var(--shadow-card);
+  }
+
   .hero-card,
   .hero-title,
   .hero-description,

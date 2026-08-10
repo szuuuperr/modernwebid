@@ -14,23 +14,23 @@ Tailwind 4. Konten berbahasa Indonesia.
 
 Website dibangun **per section**. Jika sebuah section punya elemen berulang,
 buat sub-component dulu, satukan ke dalam section, lalu section disusun di
-`app/page.tsx` yang dibungkus `app/layout.tsx`.
+`app/(site)/page.tsx` yang dibungkus `app/(site)/layout.tsx`.
 
 ```
 app/
-├── layout.tsx        # Poppins (next/font), metadata, grid-bg, page-wrapper,
-│                     # FabButton + Navbar + {children} + Footer, providers
-├── page.tsx          # Hanya menyusun section secara berurutan
-├── blog/page.tsx     # Daftar artikel (SSR, pagination via ?page=N) — section di
-│                     # components/sections/blog/, data dari lib/blog.ts
-├── blog/[slug]/      # Halaman artikel — section di components/sections/blog-detail/
-│                     # (artikel + komentar via WhatsApp + sidebar), data dari lib/blog.ts;
-│                     # sidebar memfilter daftar /blog lewat ?kategori= dan ?q= (noindex)
-├── website/[slug]/   # Detail inspirasi website — section di components/sections/
-│                     # website-detail/ (layout & sidebar reuse class .blog-post-*/
-│                     # .blog-widget*), showcase scroll 3D via framer-motion,
-│                     # data dari lib/websites.ts; sidebar memfilter /inspirasi
-│                     # lewat ?kategori= dan ?q= (dibaca server → SSR, noindex)
+├── layout.tsx        # Root minimal: Poppins (next/font), metadata, grid-bg, {children}
+│                     # — chrome & providers ada di route group (site)
+├── (site)/           # Route group halaman situs utama (URL sama, tanpa awalan):
+│   ├── layout.tsx    #   page-wrapper, FabButton + Navbar + {children} + Footer,
+│   │                 #   ScrollProgress + Lenis/MicroInteractions/ScrollReveal
+│   ├── page.tsx      #   Hanya menyusun section secara berurutan
+│   ├── blog/ ...     #   /blog & /blog/[slug]
+│   ├── website/ ...  #   /website/[slug]
+│   ├── inspirasi/    #   /inspirasi
+│   └── form/         #   /form
+├── q/[code]/         # Halaman redirect QR (di LUAR group (site), jadi polos tanpa
+│                     # navbar/footer): pintu menuju link bisnis (Google Review, WA,
+│                     # IG, Website), data di lib/qr-links.ts, kode tak dikenal → 404
 ├── sitemap.ts        # Sitemap semua halaman + image sitemap
 └── globals.css       # Tailwind + SELURUH styling (tokens :root, @theme, section styles)
 components/
@@ -42,6 +42,8 @@ components/
                       # title, titleAccent, description, buttonLabel/Href) dipakai
                       # di home, /blog, /inspirasi — lihat DESIGN.md
 lib/site.ts           # Kontak & helper waLink() — semua CTA WhatsApp lewat sini
+lib/qr-links.ts       # Data halaman /q/[code]: nama bisnis + 4 link (Google Review,
+                      # WA, IG, Website) per kode QR — edit di sini untuk mengubah target
 public/assets/        # SVG ikon/logo + webp (path absolut /assets/...)
 ```
 
