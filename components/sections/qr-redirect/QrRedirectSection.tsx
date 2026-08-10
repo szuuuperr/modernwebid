@@ -32,14 +32,14 @@ export default function QrRedirectSection({
         {/* Arc besar dari atas melengkung lebar ke kiri, lalu menyilang dan membuat loop bundar di kanan bawah */}
         <path
           d="
-            M 200,-50
-            C 250,250 -100,500 -100,600
+            M 200,-150
+            C 250,200 -100,500 -100,600
             C -100,700 100,750 250,550
             C 350,400 500,450 450,600
             C 400,700 300,650 350,550
             C 400,450 500,500 550,600
           "
-          stroke="#006aff73"
+          stroke="#006aff2b"
           strokeWidth="32"
           strokeLinecap="round"
           strokeLinejoin="round"
