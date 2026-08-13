@@ -75,10 +75,10 @@ export const QR_REDIRECTS: QrRedirect[] = [
     description: MODERNWEB_DESCRIPTION,
     logoUrl: "/assets/iRjKsumlllAOUFQjF7j1DcasTU.svg",
     links: {
-      googleReview: GOOGLE_REVIEW_URL,
-      whatsapp: WA_LINK_DEFAULT,
-      instagram: INSTAGRAM_URL,
-      website: SITE_URL,
+      googleReview: "https://search.google.com/local/writereview?placeid=ChIJ1TtVTRpZei4Ri1bdOgBk-cA",
+      whatsapp: "https://wa.me/6285875874712?text=Mau%20mulai%20bikin%20website!%20",
+      instagram: "https://www.instagram.com/modernweb.id/",
+      website: "https://www.modernwebid.com/",
     },
   },
   {

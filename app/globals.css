@@ -985,7 +985,7 @@ button {
   -moz-appearance: none;
   cursor: pointer;
   padding-right: 40px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23999999' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23999999' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 14px center;
   background-size: 16px;
@@ -4550,20 +4550,17 @@ ol.blog-post-list li::marker {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: var(--pd-64) var(--pd-32);
+  padding: var(--pd-72) var(--pd-32);
 }
 
 .qr-line-deco {
   position: absolute;
-  top: 15%;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100%;
-  height: 85%;
+  top: 0;
+  width: 85vw;
+  height: 100vh;
   pointer-events: none;
   z-index: -1;
-  opacity: 0.75;
+  opacity: 0.5;
 }
 
 @media (min-width: 768px) {
@@ -4605,22 +4602,35 @@ ol.blog-post-list li::marker {
   height: auto;
 }
 
+.qr-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
 .qr-title {
   font-size: 18px;
   font-weight: 500;
   line-height: 1.3;
   color: var(--neutral-black);
   text-align: center;
-  margin-bottom: 8px;
+}
+
+.qr-verified-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
 }
 
 .qr-description {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 400;
   line-height: 1.5;
   color: var(--neutral-gray);
   text-align: center;
-  max-width: 260px;
+  max-width: 320px;
   margin-bottom: 32px;
   text-align: center;
 }
@@ -4649,7 +4659,9 @@ ol.blog-post-list li::marker {
   background-size: 400% 400%;
   animation: gradientRotate 3s ease infinite;
   box-shadow: var(--shadow-card);
-  transition: box-shadow 0.25s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 @keyframes gradientRotate {
@@ -4675,6 +4687,7 @@ ol.blog-post-list li::marker {
 }
 
 .qr-google-btn:hover {
+  transform: translateY(-2px);
   box-shadow: var(--shadow-card-hover);
 }
 
@@ -4723,10 +4736,13 @@ ol.blog-post-list li::marker {
   border-radius: 4px 14px 4px 14px;
   box-shadow: var(--shadow-card);
   border: 1px solid #f3f4f6;
-  transition: box-shadow 0.25s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .qr-link:hover {
+  transform: translateY(-2px);
   box-shadow: var(--shadow-card-hover);
 }
 
