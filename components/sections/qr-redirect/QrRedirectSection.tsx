@@ -40,7 +40,7 @@ export default function QrRedirectSection({
             C 400,450 500,500 550,600
           "
           stroke="#006aff2b"
-          strokeWidth="48"
+          strokeWidth="36"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
