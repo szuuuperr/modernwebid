@@ -18,34 +18,6 @@ export default function QrRedirectSection({
 
   return (
     <section className="qr-page">
-      {/* Background Line Decoration — satu garis kontinu: arc besar dari
-           atas-tengah menyapu lebar ke kiri (keluar viewport), melingkar di
-           bawah-kiri, kembali ke kanan menyilang diri sendiri, lalu loop
-           kecil di kanan-bawah. */}
-      <svg
-        className="qr-line-deco"
-        viewBox="0 0 480 860"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        aria-hidden="true"
-      >
-        {/* Arc besar dari atas melengkung lebar ke kiri, lalu menyilang dan membuat loop bundar di kanan bawah */}
-        <path
-          d="
-            M 200,-150
-            C 250,200 -100,500 -100,600
-            C -100,700 100,750 250,550
-            C 350,400 500,450 450,600
-            C 400,700 300,650 350,550
-            C 400,450 500,500 550,600
-          "
-          stroke="#006aff2b"
-          strokeWidth="36"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-
       <div className="qr-avatar">
         {logoUrl ? (
           <img src={logoUrl} alt={businessName} className="qr-avatar-img" />

@@ -4545,22 +4545,13 @@ ol.blog-post-list li::marker {
   height: 100vh;
   overflow: clip;
   isolation: isolate;
-  background: var(--neutral-white);
+  background: #ffffff;
+  background: radial-gradient(600% 150% at 50% 10%, #fff 40%, #006aff9a 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: var(--pd-64) var(--pd-32);
-}
-
-.qr-line-deco {
-  position: absolute;
-  top: 0;
-  width: 100vw;
-  height: 150vh;
-  pointer-events: none;
-  z-index: -1;
-  opacity: 0.5;
 }
 
 @media (min-width: 768px) {
@@ -4574,8 +4565,8 @@ ol.blog-post-list li::marker {
 }
 
 .qr-avatar {
-  width: 112px;
-  height: 112px;
+  width: 96px;
+  height: 96px;
   border-radius: 50%;
   overflow: hidden;
   flex-shrink: 0;
@@ -4625,7 +4616,7 @@ ol.blog-post-list li::marker {
 }
 
 .qr-description {
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 400;
   line-height: 1.5;
   color: var(--neutral-gray);
@@ -4765,7 +4756,7 @@ ol.blog-post-list li::marker {
 }
 
 .qr-link-label {
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 400;
   color: var(--neutral-700);
 }
