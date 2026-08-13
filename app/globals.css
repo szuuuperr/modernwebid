@@ -4556,8 +4556,8 @@ ol.blog-post-list li::marker {
 .qr-line-deco {
   position: absolute;
   top: 0;
-  width: 85vw;
-  height: 100vh;
+  width: 100vw;
+  height: 120vh;
   pointer-events: none;
   z-index: -1;
   opacity: 0.5;
