@@ -729,9 +729,11 @@ button {
 }
 
 .brand-logos img {
-  height: auto;
+  height: 100%;
   max-height: 36px;
   width: auto;
+  max-width: 140px;
+  object-fit: contain;
   flex-shrink: 0;
   margin-right: var(--gap-64);
   opacity: 0.8;
@@ -4117,6 +4119,7 @@ ol.blog-post-list li::marker {
 
   .brand-logos img {
     max-height: 40px;
+    max-width: 160px;
   }
 }
 
@@ -4191,6 +4194,7 @@ ol.blog-post-list li::marker {
 
   .brand-logos img {
     max-height: 32px;
+    max-width: 120px;
     margin-right: var(--gap-32);
   }
 
@@ -4256,6 +4260,7 @@ ol.blog-post-list li::marker {
 
   .brand-logos img {
     max-height: 32px;
+    max-width: 120px;
   }
 
   /* Inspiration: 2 → 1 column */
@@ -4530,6 +4535,7 @@ ol.blog-post-list li::marker {
 
   .brand-logos img {
     max-height: 24px;
+    max-width: 100px;
   }
 }
 
@@ -4542,16 +4548,267 @@ ol.blog-post-list li::marker {
 .qr-page {
   position: relative;
   width: var(--stage-w);
-  height: 100vh;
-  overflow: clip;
-  isolation: isolate;
+  min-height: 100vh;
+  overflow-y: auto;
   background: #ffffff;
   background: radial-gradient(600% 150% at 50% 10%, #fff 40%, #006aff9a 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   padding: var(--pd-64) var(--pd-32);
+  padding-bottom: 32px;
+}
+
+.qr-topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  z-index: 100;
+}
+
+.qr-logo-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0, 0, 0, 0.05);
+  color: var(--neutral-black);
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.qr-logo-link:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.qr-share-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0, 0, 0, 0.05);
+  color: var(--neutral-black);
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.2s ease;
+}
+
+.qr-share-btn:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.qr-share-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+.qr-more-btn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  color: var(--neutral-gray);
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.qr-more-btn:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: var(--neutral-700);
+}
+
+.qr-more-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Share Modal */
+.qr-share-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  animation: qrFadeIn 0.2s ease;
+}
+
+@keyframes qrFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.qr-share-modal {
+  width: 90%;
+  max-width: 360px;
+  background: var(--neutral-white);
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  animation: qrSlideUp 0.25s ease;
+}
+
+@keyframes qrSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.qr-share-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px 12px;
+}
+
+.qr-share-modal-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--neutral-black);
+}
+
+.qr-share-modal-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: var(--neutral-gray);
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.qr-share-modal-close:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.qr-share-modal-close svg {
+  width: 18px;
+  height: 18px;
+}
+
+.qr-share-modal-url {
+  margin: 0 20px 16px;
+  padding: 10px 14px;
+  background: #f5f5f5;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.qr-share-modal-url-text {
+  font-size: 12px;
+  color: var(--neutral-700);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+
+.qr-share-modal-options {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4px;
+  padding: 4px 12px 20px;
+}
+
+.qr-share-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 4px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 12px;
+  transition: background 0.2s ease;
+}
+
+.qr-share-option:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.qr-share-option-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qr-share-option-icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.qr-share-option-icon-copy {
+  background: #f0f0f0;
+  color: var(--neutral-black);
+}
+
+.qr-share-option-icon-wa {
+  background: #25d366;
+  color: white;
+}
+
+.qr-share-option-icon-fb {
+  background: #1877f2;
+  color: white;
+}
+
+.qr-share-option-icon-tw {
+  background: #000000;
+  color: white;
+}
+
+.qr-share-option-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--neutral-700);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .qr-share-overlay {
+    animation: none;
+  }
+  .qr-share-modal {
+    animation: none;
+  }
 }
 
 @media (min-width: 768px) {
@@ -4570,7 +4827,7 @@ ol.blog-post-list li::marker {
   border-radius: 50%;
   overflow: hidden;
   flex-shrink: 0;
-  margin-bottom: 24px;
+  margin-bottom: 25px;
 }
 
 .qr-avatar-img {
@@ -4634,6 +4891,7 @@ ol.blog-post-list li::marker {
 }
 
 .qr-google-btn {
+  position: relative;
   display: block;
   border-radius: 4px 16px 4px 16px;
   padding: 5px;

@@ -1,5 +1,6 @@
-import { Star } from "lucide-react";
-import type { QrRedirect } from "@/lib/qr-links";
+import { Globe, Star } from "lucide-react";
+import type { QrLink, QrRedirect } from "@/lib/qr-links";
+import ShareButton from "./ShareButton";
 
 type QrRedirectSectionProps = {
   redirect: QrRedirect;
@@ -17,7 +18,24 @@ export default function QrRedirectSection({
   const { businessName, description, logoUrl, links } = redirect;
 
   return (
-    <section className="qr-page">
+    <>
+      <div className="qr-topbar">
+        <a href="/" className="qr-logo-link" aria-label="Back">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 869.959 869.958"
+            fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M146.838,484.584c10.271,10.395,23.804,15.6,37.347,15.6c13.329,0,26.667-5.046,36.897-15.155 c20.625-20.379,20.825-53.62,0.445-74.245l-41.688-42.191h423.78c88.963,0,161.34,72.376,161.34,161.339v4.32 c0,43.096-16.782,83.61-47.255,114.084c-20.503,20.502-20.503,53.744,0,74.246c10.251,10.251,23.688,15.377,37.123,15.377 c13.435,0,26.872-5.125,37.123-15.377c50.305-50.306,78.009-117.188,78.009-188.331v-4.32c0-71.142-27.704-138.026-78.009-188.331 c-50.306-50.305-117.189-78.009-188.331-78.009h-424.99l42.25-41.747c20.625-20.379,20.825-53.62,0.445-74.245 c-20.376-20.624-53.618-20.825-74.244-0.445L15.601,277.068c-9.905,9.787-15.517,23.107-15.6,37.03 c-0.084,13.924,5.367,27.31,15.154,37.215L146.838,484.584z" />
+          </svg>
+        </a>
+        <ShareButton />
+      </div>
+
+      <section className="qr-page">
+
       <div className="qr-avatar">
         {logoUrl ? (
           <img src={logoUrl} alt={businessName} className="qr-avatar-img" />
@@ -54,54 +72,45 @@ export default function QrRedirectSection({
       <p className="qr-description">{description}</p>
 
       <div className="qr-links">
-        <a
-          href={links.googleReview}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="qr-google-btn"
-        >
-          <div className="qr-google-btn-inner">
-            <GoogleIcon className="qr-google-icon" />
-            <div className="qr-google-copy">
-              <p className="qr-google-text">
-                Review us <br /> on{" "}
-                <span className="qr-google-text-strong">Google</span>
-              </p>
-              <div className="qr-stars">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star
-                    key={i}
-                    className="qr-star"
-                    fill="currentColor"
-                    strokeWidth={0}
-                    aria-hidden
-                  />
-                ))}
+        {links.map((link) =>
+          link.type === "googleReview" ? (
+            <a
+              key={link.type}
+              href={link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="qr-google-btn"
+            >
+              <div className="qr-google-btn-inner">
+                <GoogleIcon className="qr-google-icon" />
+                <div className="qr-google-copy">
+                  <p className="qr-google-text">
+                    Review us <br /> on{" "}
+                    <span className="qr-google-text-strong">Google</span>
+                  </p>
+                  <div className="qr-stars">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <Star
+                        key={i}
+                        className="qr-star"
+                        fill="currentColor"
+                        strokeWidth={0}
+                        aria-hidden
+                      />
+                    ))}
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        </a>
-
-        <LinkButton
-          href={links.whatsapp}
-          icon={<WhatsAppIcon className="qr-link-icon" />}
-          label="WhatsApp"
-        />
-        <LinkButton
-          href={links.instagram}
-          icon={<InstagramIcon className="qr-link-icon qr-link-icon-sm" />}
-          label="Instagram"
-        />
-        <LinkButton
-          href={links.website}
-          icon={<TiktokIcon className="qr-link-icon" />}
-          label="Tiktok"
-        />
-        <LinkButton
-          href={links.website}
-          icon={<WebsiteIcon className="qr-link-icon qr-link-icon-sm" />}
-          label="Website"
-        />
+            </a>
+          ) : (
+            <LinkButton
+              key={link.type}
+              href={link.url}
+              icon={<LinkIcon type={link.type} />}
+              label={link.label}
+            />
+          ),
+        )}
       </div>
 
       <footer className="qr-footer">
@@ -110,8 +119,31 @@ export default function QrRedirectSection({
           <img src="/assets/logo.svg" alt="ModernWeb" />
         </a>
       </footer>
-    </section>
+      </section>
+    </>
   );
+}
+
+function LinkIcon({ type }: { type: QrLink["type"] }) {
+  const cls = "qr-link-icon";
+  switch (type) {
+    case "whatsapp":
+      return <WhatsAppIcon className={cls} />;
+    case "instagram":
+      return <InstagramIcon className={`${cls} qr-link-icon-sm`} />;
+    case "website":
+      return <WebsiteIcon className={`${cls} qr-link-icon-sm`} />;
+    case "tiktok":
+      return <TiktokIcon className={cls} />;
+    case "youtube":
+      return <YoutubeIcon className={cls} />;
+    case "linkedin":
+      return <LinkedinIcon className={cls} />;
+    case "facebook":
+      return <FacebookIcon className={cls} />;
+    default:
+      return <Globe className={cls} />;
+  }
 }
 
 function LinkButton({
@@ -132,7 +164,20 @@ function LinkButton({
     >
       {icon}
       <span className="qr-link-label">{label}</span>
+      <MoreButton />
     </a>
+  );
+}
+
+function MoreButton() {
+  return (
+    <span className="qr-more-btn" aria-label="Opsi lain">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="7" r="1.5" fill="currentColor" />
+        <circle cx="12" cy="12" r="1.5" fill="currentColor" />
+        <circle cx="12" cy="17" r="1.5" fill="currentColor" />
+      </svg>
+    </span>
   );
 }
 
@@ -289,6 +334,30 @@ function TiktokIcon({ className }: { className?: string }) {
           fill="#69C9D0"
         ></path>{" "}
       </g>
+    </svg>
+  );
+}
+
+function YoutubeIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} fill="#FF0000">
+      <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+    </svg>
+  );
+}
+
+function LinkedinIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} fill="#0A66C2">
+      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+    </svg>
+  );
+}
+
+function FacebookIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} fill="#1877F2">
+      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
     </svg>
   );
 }
